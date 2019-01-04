@@ -5,36 +5,34 @@ class Select extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: this.getID(),
       active: false,
-      selectValue: {}
+      selectValue: null
     }
   }
   render() {
-    let { active, selectValue } = this.state
-    let { value, options, className } = this.props
-    let menu = []
+    let { id, active, selectValue } = this.state
+    let { options, className } = this.props
+    let listArr = []
     for (let i = 0; i < options.length; i++) {
-      menu.push(<li className={"m-select-list-item " + (selectValue.value === options[i].value ? 'active' : '')} key={i} 
+      let active = ''
+      if (selectValue && selectValue.value === options[i].value) {
+        active = 'active'
+      }
+      listArr.push(<li className={"m-select-list-item " + active} key={options[i].value} 
         onClick={this.handleSelectItem.bind(this, options[i])}>{options[i].label} </li>)
     }
     let selectItem
-    if (selectValue.value) {
+    if (selectValue && selectValue.value) {
       selectItem = selectValue
-    } else if (value) {
-      selectItem = value
-      this.setState({
-        selectValue: value
-      })
     } else {
       selectItem = { value: '', label: 'Select...' }
     }
     return (
       <div className={"m-select-wrap " + className}>
-        <div className="m-select-current js-select-current" onClick={this.handleClick.bind(this)}>{selectItem.label}</div>
+        <div className="m-select-current" id={id} onClick={this.handleClick.bind(this)}>{selectItem.label}</div>
         <div className={"m-select-list-wrap " +　(active ? 'active' : '')}>
-          <ul className="m-select-list">
-          {menu}
-          </ul>
+          <ul className="m-select-list">{listArr}</ul>
         </div>
       </div>
     );
@@ -42,16 +40,23 @@ class Select extends Component {
 }
 
 Object.assign(Select.prototype, {
+  componentWillReceiveProps(nexeProps) {
+    this.setState({
+      selectValue: nexeProps.value
+    })
+  },
   componentDidMount() {
+    let { value } = this.props
     document.body.addEventListener('click', e => {
-      if (e.target && e.target.className.indexOf('js-select-current') < 0) {
-        this.setState({
-          active: false
-        })        
-        return;
-      }
-      console.log('body');
+      this.setState({
+        active: false
+      })
     });
+    if (value) {
+      this.setState({
+        selectValue: value
+      })
+    }
   },
   handleClick() {
     this.setState({
@@ -64,7 +69,10 @@ Object.assign(Select.prototype, {
       active: false
     })
     this.props.onChange(item)
-  }
+  },
+  getID(length) {
+    return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
+  },
 })
 
 export default Select;

@@ -4,9 +4,5 @@ html, body{width: 100%; height: 100%;}
 .m-pop{position: absolute;top: 50%;left: 50%; width:400px;height: 600px; transform: translate(-50%,-50%);background: #FF0000;transition:background 0.8s linear;}
 .m-pop:hover{background: #FFFF00;}
 .m-select{width: 200px;}
-.m-select-item{list-style-type: none;cursor: pointer;}
-.m-menu{display: none;}
-.m-menu.active{display: block;}
-
 
 

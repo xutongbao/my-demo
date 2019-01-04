@@ -29,8 +29,11 @@ class Select extends Component {
       selectItem = { value: '', label: 'Select...' }
     }
     return (
-      <div className={"m-select-wrap " + className}>
-        <div className="m-select-current" id={id} onClick={this.handleClick.bind(this)}>{selectItem.label}</div>
+      <div className={"m-select-wrap " + className} id={id}>
+        <div className="m-select-current" onClick={this.handleClick.bind(this)}>
+          {selectItem.label}
+          <span className={"m-select-icon " + (active ? 'active' : '')}>▲</span>
+        </div>
         <div className={"m-select-list-wrap " +　(active ? 'active' : '')}>
           <ul className="m-select-list">{listArr}</ul>
         </div>

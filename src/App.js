@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       selectedOption1: null,
       selectedOption2: null,
-      selectedOption3: { value: 'chocolate', label: 'Chocolate' }
+      selectedOption3: { value: 'react', label: 'React' }
     }
   }  
   render() {
@@ -20,17 +20,22 @@ class App extends Component {
       { value: 'vanilla', label: 'Vanilla' }
     ];   
     const options2 = [
-      { value: 'chocolate', label: 'Chocolate' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'vanilla', label: 'Vanilla' }
+      { value: 'js', label: 'javascript' },
+      { value: 'css', label: 'CSS' },
+      { value: 'html', label: 'HTML' }
     ];    
     const options3 = [
-      { value: 'chocolate', label: 'Chocolate' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'vanilla', label: 'Vanilla' }
+      { value: 'react', label: 'React' },
+      { value: 'vue', label: 'Vue' },
+      { value: 'nextjs', label: 'Nextjs' }
     ];       
     return (
-      <div className="m-wrap">
+      <div className="m-wrap">   
+        {/*<div className="m-pop3">
+          <div className="m-pop3-inner"></div> 
+        </div>                   
+        <div className="m-pop"></div>
+        <div className="m-pop2"></div>*/}
         <Select
           className="m-select"
           value={selectedOption1}
@@ -48,8 +53,7 @@ class App extends Component {
           value={selectedOption3}
           onChange={this.handleChange3.bind(this)}
           options={options3}
-        />               
-        {/*<div className="m-pop"></div>*/}
+        />         
       </div>
     );
   }
